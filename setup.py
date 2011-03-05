@@ -45,7 +45,7 @@ setup(
     author = "Santhosh Thottingal",
     author_email = "santhosh.thottingal@gmail.com",
     long_description = long_description,
-    package = find_packages('src'),
+    packages = find_packages('src'),
     package_dir = {'' : 'src'},
     setup_requires = ['setuptools-git'],
     namespace_packages = ['hyphenator'],
