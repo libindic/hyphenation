@@ -3,6 +3,7 @@
 # pypdflib/utils/hyphenation/hyphenator.py
 
 # pypdflib is a pango/cairo framework for generating reports.
+# Copyright © 2008  Wilbert Berendsen <info@wilbertberendsen.nl>  
 # Copyright © 2010  Santhosh Thottingal <santhosh.thottingal@gmail.com>
 
 # This file is part of pypdflib.
@@ -154,25 +155,13 @@ class Hyphenator:
     """
     Reads a hyph_*.dic file and stores the hyphenation patterns.
     Provides methods to hyphenate strings in various ways.
-    Parameters:
-    -filename : filename of hyph_*.dic to read
-    -left: make the first syllabe not shorter than this
-    -right: make the last syllabe not shorter than this
-    -cache: if true (default), use a cached copy of the dic file, if possible
-
-    left and right may also later be changed:
-    h = Hyphenator(file)
-    h.left = 1
     """
     
-    #self.left=2
-    #def __init__(self, left=2, right=2, cache=True):
+
     left  = 2
     right = 2
     def __init__(self):
-        self.template=os.path.join(os.path.dirname(__file__), 'hyphenator.html')
         self.hd=None
-#        self.guess_language=guess_language.getInstance()
     def loadHyphDict(self,lang, cache=True):
         filename = os.path.join(os.path.dirname(__file__), "rules/hyph_"+lang+".dic")
         if not cache or filename not in hdcache:
