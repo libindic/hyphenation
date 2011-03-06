@@ -1,8 +1,14 @@
 Hyphenator - A Python based hyphenation module
 ==================================================
-A Python hyphenation module. This module comes with Indic hyphenation
-patterns. If you want it to work with other language you need to place
-the proper rules under src/hyphenator/rules folder before compiling it
+A Python hyphenation module.This module was originally written 
+by Wilbert Berendsen <wbsoft at xs4all nl> and original module 
+is avaialble at http://pypi.python.org/pypi/hyphenator/0.5.1.
+This module is later modified by Santhosh Thottingal to include
+indic hyphenation pattern and a hyphenation function which works
+by taking text input and language and hyphenation symbol(optional)
+as shown in below examples.
+If you want it to work with other language you need to place
+the proper rules under src/hyphenator/rules folder before compiling it.
 
 How to Install?
 ---------------
