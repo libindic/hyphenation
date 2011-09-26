@@ -25,7 +25,7 @@
 import os
 from setuptools import setup, find_packages
 
-module_name='hyphenator'
+module_name='hyphenation'
 
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
@@ -38,17 +38,17 @@ long_description=(
 
 setup(
     name = module_name,
-    version = "0.1b1",
+    version = "1.0",
     url="http://gitorious.org/hyphenator",
     license = "LGLP 3.0",
     description = "Hyphenation module for Python",
     author = "Santhosh Thottingal",
     author_email = "santhosh.thottingal@gmail.com",
-    long_description = long_description,
+    long_description = "Modified hyphenator module with Indian Language hyphenation patterns",
     packages = find_packages('src'),
     package_dir = {'' : 'src'},
     setup_requires = ['setuptools-git'],
-    namespace_packages = ['hyphenator'],
+    namespace_packages = ['hyphenation'],
     include_package_data = True,
     install_requires = ['setuptools'],
     zip_safe = False,
