@@ -38,15 +38,14 @@ long_description=(
 
 setup(
     name = module_name,
-    version = "1.0",
+    version = "1.1",
     url="http://gitorious.org/hyphenator",
     license = "LGLP 3.0",
     description = "Hyphenation module for Python",
     author = "Santhosh Thottingal",
     author_email = "santhosh.thottingal@gmail.com",
     long_description = "Modified hyphenator module with Indian Language hyphenation patterns",
-    packages = find_packages('src'),
-    package_dir = {'' : 'src'},
+    packages = ['hyphenation'],
     setup_requires = ['setuptools-git'],
     namespace_packages = ['hyphenation'],
     include_package_data = True,
