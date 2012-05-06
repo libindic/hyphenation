@@ -23,7 +23,7 @@
 
 
 import os
-from setuptools import setup, find_packages
+from setuptools import setup
 
 module_name='hyphenation'
 
@@ -47,7 +47,6 @@ setup(
     long_description = "Modified hyphenator module with Indian Language hyphenation patterns",
     packages = ['hyphenation'],
     setup_requires = ['setuptools-git'],
-    namespace_packages = ['hyphenation'],
     include_package_data = True,
     install_requires = ['setuptools'],
     zip_safe = False,
