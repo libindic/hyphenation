@@ -4,7 +4,7 @@
 import re
 import os
 
-__all__ = ["Hyphenator","parse_alt","dint","Hyph_dict"]
+__all__ = ["Hyphenator", "parse_alt", "dint", "Hyph_dict"]
 
 # cache of per-file Hyph_dict objects
 hdcache = {}
@@ -12,6 +12,7 @@ hdcache = {}
 # precompile some stuff
 parse_hex = re.compile(r'\^{2}([0-9a-f]{2})').sub
 parse = re.compile(r'(\d?)(\D?)').findall
+
 
 def hexrepl(matchObj):
     return unichr(int(matchObj.group(1), 16))
@@ -73,7 +74,8 @@ class Hyph_dict(object):
 
         for pat in f:
             pat = pat.decode(charset).strip()
-            if not pat or pat[0] == '%': continue
+            if not pat or pat[0] == '%':
+                continue
             # replace ^^hh with the real character
             pat = parse_hex(hexrepl, pat)
             # read nonstandard hyphen alternatives
@@ -82,13 +84,17 @@ class Hyph_dict(object):
                 factory = parse_alt(pat, alt)
             else:
                 factory = int
-            tag, value = zip(*[(s, factory(i or "0")) for i, s in parse(pat)])
+            tag, value = zip(*[(s, factory(i or "0")) \
+                    for i, s in parse(pat)])
             # if only zeros, skip this pattern
-            if max(value) == 0: continue
+            if max(value) == 0:
+                continue
             # chop zeros from beginning and end, and store start offset.
             start, end = 0, len(value)
-            while not value[start]: start += 1
-            while not value[end-1]: end -= 1
+            while not value[start]:
+                start += 1
+            while not value[end - 1]:
+                end -= 1
             self.patterns[''.join(tag)] = start, value[start:end]
         f.close()
         self.cache = {}
@@ -135,17 +141,20 @@ class Hyphenator:
     Reads a hyph_*.dic file and stores the hyphenation patterns.
     Provides methods to hyphenate strings in various ways.
     """
-    
 
-    left  = 2
+    left = 2
     right = 2
+
     def __init__(self):
-        self.hd=None
-    def loadHyphDict(self,lang, cache=True):
-        filename = os.path.join(os.path.dirname(__file__), "rules/hyph_"+lang+".dic")
+        self.hd = None
+
+    def loadHyphDict(self, lang, cache=True):
+        filename = os.path.join(os.path.dirname(__file__), "rules/hyph_" \
+                + lang + ".dic")
         if not cache or filename not in hdcache:
             hdcache[filename] = Hyph_dict(filename)
         self.hd = hdcache[filename]
+
     def positions(self, word):
         """
         Returns a list of positions where the word can be hyphenated.
@@ -168,7 +177,7 @@ class Hyphenator:
                 if word.isupper():
                     change = change.upper()
                 c1, c2 = change.split('=')
-                yield word[:p+index] + c1, c2 + word[p+index+cut:]
+                yield word[:p + index] + c1, c2 + word[p + index + cut:]
             else:
                 yield word[:p], word[p:]
 
@@ -200,20 +209,20 @@ class Hyphenator:
                 change, index, cut = p.data
                 if word.isupper():
                     change = change.upper()
-                l[p + index : p + index + cut] = change.replace('=', hyphen)
+                l[p + index: p + index + cut] = change.replace('=', hyphen)
             else:
                 l.insert(p, hyphen)
         return ''.join(l)
-                      
-    def hyphenate(self,text,language, hyphen=u'\u00AD'):
-        response=""
+
+    def hyphenate(self, text, language, hyphen=u'\u00AD'):
+        response = ""
         words = text.split(" ")
         self.loadHyphDict(language)
         for word in words:
-             hyph_word = self.inserted(word, hyphen)
-             response = response + hyph_word + " "
+            hyph_word = self.inserted(word, hyphen)
+            response = response + hyph_word + " "
         return response
+
 
 def getInstance():
     return Hyphenator()
-
