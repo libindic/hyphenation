@@ -32,7 +32,7 @@ def read(*rnames):
 
 long_description=(
         read('README.md')
-        + '\n' 
+        + '\n'
         )
 
 
@@ -48,6 +48,6 @@ setup(
     packages = ['hyphenation'],
     setup_requires = ['setuptools-git'],
     include_package_data = True,
-    install_requires = ['setuptools'],
+    install_requires = ['setuptools','guesslanguage'],
     zip_safe = False,
     )

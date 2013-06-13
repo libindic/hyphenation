@@ -3,6 +3,7 @@
 
 import re
 import os
+from guesslanguage import getInstance as guesslanguage_instance
 
 __all__ = ["Hyphenator", "parse_alt", "dint", "Hyph_dict"]
 
@@ -147,6 +148,7 @@ class Hyphenator:
 
     def __init__(self):
         self.hd = None
+        self.guesslanguage = guesslanguage_instance()
 
     def loadHyphDict(self, lang, cache=True):
         filename = os.path.join(os.path.dirname(__file__), "rules/hyph_" \
@@ -214,7 +216,10 @@ class Hyphenator:
                 l.insert(p, hyphen)
         return ''.join(l)
 
-    def hyphenate(self, text, language, hyphen=u'\u00AD'):
+    def hyphenate(self, text, hyphen=u'\u00AD', language=None):
+        if language is None:
+            language = self.guesslanguage.guessLanguageId(text)
+            print language + "################################"
         response = ""
         words = text.split(" ")
         self.loadHyphDict(language)
