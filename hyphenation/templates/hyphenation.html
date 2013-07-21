@@ -30,7 +30,6 @@
                     var result = msg.result.replace("\n", "&#13;");
                     id_progress.hide();
                     id_result.html(result).show();
-                    id_result.show();
                 },
                 error: function(msg) {
                     id_progress.hide();
@@ -75,7 +74,7 @@
 <div id="errormessage" class="alert alert-error hide"></div>
 <hr/>
 </div>
-<div  id="result" class="well hide">
+<div  id="result" class="well">
     <p class="multiplecolumns " align='justify'>
     </p>
 </div>
