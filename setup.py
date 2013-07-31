@@ -38,7 +38,7 @@ long_description=(
 
 setup(
     name = module_name,
-    version = "1.1",
+    version = "2.0",
     url="http://gitorious.org/hyphenator",
     license = "LGLP 3.0",
     description = "Hyphenation module for Python",
