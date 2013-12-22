@@ -5,16 +5,16 @@
         $("form").submit(function(event)
         {
             event.preventDefault();
-            id_result = $('#result p');
-            id_error = $('#errormessage');
-            id_progress = $('#progress');
-            var text= $("textarea[name=text]", 'form').val();
-            var hyphChar= $("select[name=direction]", 'form').val();
-            var jsonRequest = {
-                "method" : "hyphenation.hyphenate",
-                "params" : [text, hyphChar],
-                "id" : ""
-            };
+            var id_result = $('#result p'),
+                id_error = $('#errormessage'),
+                id_progress = $('#progress'),
+                text = $("textarea[name=text]", 'form').val(),
+                hyphChar = $("select[name=direction]", 'form').val(),
+                jsonRequest = {
+                    method: "hyphenation.hyphenate",
+                    params: [text, hyphChar],
+                    id: ""
+                };
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
