@@ -221,7 +221,7 @@ class Hyphenator:
     def hyphenate(self, text, hyphen=u'\u00AD', language=None):
         if language is None:
             language = self.guesslanguage.guessLanguageId(text)
-            print language + "################################"
+            print("Language detected as %s" % language)
         response = ""
         words = text.split(" ")
         self.loadHyphDict(language)
