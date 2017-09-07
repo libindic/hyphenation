@@ -2,4 +2,4 @@
 # -*- coding:utf-8 -*-
 
 
-from hyphenation.core import Hyphenator, getInstance
+from .core import Hyphenator, getInstance
