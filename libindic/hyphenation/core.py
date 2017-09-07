@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
 import re
 import os
@@ -25,6 +25,7 @@ class parse_alt(object):
     The instance returns a special int with data about the current position
     in the pattern when called with an odd value.
     """
+
     def __init__(self, pat, alt):
         alt = alt.split(',')
         self.change = alt[0]
@@ -53,7 +54,7 @@ class dint(int):
     """
     def __new__(cls, value, data=None, ref=None):
         obj = int.__new__(cls, value)
-        if ref and type(ref) == dint:
+        if ref and isinstance(ref, dint):
             obj.data = ref.data
         else:
             obj.data = data
@@ -66,6 +67,7 @@ class Hyph_dict(object):
     Parameters:
     -filename : filename of hyph_*.dic to read
     """
+
     def __init__(self, filename):
         self.patterns = {}
         f = open(filename)
@@ -85,8 +87,8 @@ class Hyph_dict(object):
                 factory = parse_alt(pat, alt)
             else:
                 factory = int
-            tag, value = zip(*[(s, factory(i or "0")) \
-                    for i, s in parse(pat)])
+            tag, value = zip(*[(s, factory(i or "0"))
+                               for i, s in parse(pat)])
             # if only zeros, skip this pattern
             if max(value) == 0:
                 continue
@@ -151,8 +153,8 @@ class Hyphenator:
         self.guesslanguage = guesslanguage_instance()
 
     def loadHyphDict(self, lang, cache=True):
-        filename = os.path.join(os.path.dirname(__file__), "rules/hyph_" \
-                + lang + ".dic")
+        filename = os.path.join(os.path.dirname(__file__), "rules/hyph_" +
+                                lang + ".dic")
         if not cache or filename not in hdcache:
             hdcache[filename] = Hyph_dict(filename)
         self.hd = hdcache[filename]
