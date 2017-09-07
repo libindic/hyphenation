@@ -17,7 +17,7 @@ under libindic/hyphenator/rules folder before compiling it.
 1. Clone the repository `git clone https://github.com/libindic/hyphenation.git`
 2. Change to the cloned directory `cd hyphenation`
 3. Run setup.py to create installable source `python setup.py sdist`
-3. Install using pip `pip install dist/libindic-hyphenation*.tar.gz`
+4. Install using pip `pip install dist/libindic-hyphenation*.tar.gz`
 
 ## Usage
 ```
