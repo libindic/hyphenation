@@ -1,1 +1,1 @@
--e git+https://github.com/libindic/guesslanguage.git#egg=libindic-guesslanguage
+-e git+https://github.com/libindic/guesslanguage.git#egg=libindic_guesslanguage
