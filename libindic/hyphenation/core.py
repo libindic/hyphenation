@@ -3,7 +3,7 @@
 
 import re
 import os
-from guesslanguage import getInstance as guesslanguage_instance
+from libindic.guesslanguage import LangGuess
 
 __all__ = ["Hyphenator", "parse_alt", "dint", "Hyph_dict"]
 
@@ -16,7 +16,11 @@ parse = re.compile(r'(\d?)(\D?)').findall
 
 
 def hexrepl(matchObj):
-    return unichr(int(matchObj.group(1), 16))
+    try:
+        result = unichr(int(matchObj.group(1), 16))  # noqa: F821
+    except:
+        result = chr(int(matchObj.group(1), 16))
+    return result
 
 
 class parse_alt(object):
@@ -76,7 +80,10 @@ class Hyph_dict(object):
             charset = charset[8:].strip()
 
         for pat in f:
-            pat = pat.decode(charset).strip()
+            try:
+                pat = pat.decode(charset).strip()
+            except:
+                pat = pat.strip()
             if not pat or pat[0] == '%':
                 continue
             # replace ^^hh with the real character
@@ -150,7 +157,7 @@ class Hyphenator:
 
     def __init__(self):
         self.hd = None
-        self.guesslanguage = guesslanguage_instance()
+        self.guesslanguage = LangGuess()
 
     def loadHyphDict(self, lang, cache=True):
         filename = os.path.join(os.path.dirname(__file__), "rules/hyph_" +
@@ -173,7 +180,10 @@ class Hyphenator:
         Iterate over all hyphenation possibilities, the longest first.
         """
         if isinstance(word, str):
-            word = word.decode('latin1')
+            try:
+                word = word.decode('latin1')
+            except:
+                pass
         for p in reversed(self.positions(word)):
             if p.data:
                 # get the nonstandard hyphenation data
@@ -205,7 +215,10 @@ class Hyphenator:
         given as the second parameter, that defaults to '-'.
         """
         if isinstance(word, str):
-            word = word.decode('utf-8')
+            try:
+                word = word.decode('utf-8')
+            except:
+                pass
         l = list(word)
         for p in reversed(self.positions(word)):
             if p.data:
