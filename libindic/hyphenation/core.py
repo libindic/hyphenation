@@ -3,7 +3,7 @@
 
 import re
 import os
-from guesslanguage import getInstance as guesslanguage_instance
+from libindic.guesslanguage import getInstance as guesslanguage_instance
 
 __all__ = ["Hyphenator", "parse_alt", "dint", "Hyph_dict"]
 
@@ -76,7 +76,7 @@ class Hyph_dict(object):
             charset = charset[8:].strip()
 
         for pat in f:
-            pat = pat.decode(charset).strip()
+            pat = pat.strip()
             if not pat or pat[0] == '%':
                 continue
             # replace ^^hh with the real character
@@ -172,8 +172,6 @@ class Hyphenator:
         """
         Iterate over all hyphenation possibilities, the longest first.
         """
-        if isinstance(word, str):
-            word = word.decode('latin1')
         for p in reversed(self.positions(word)):
             if p.data:
                 # get the nonstandard hyphenation data
@@ -204,8 +202,8 @@ class Hyphenator:
         the string 'let-ter-gre-pen'. The hyphen string to use can be
         given as the second parameter, that defaults to '-'.
         """
-        if isinstance(word, str):
-            word = word.decode('utf-8')
+        #if isinstance(word, str):
+        #    word = word.decode('utf-8')
         l = list(word)
         for p in reversed(self.positions(word)):
             if p.data:
