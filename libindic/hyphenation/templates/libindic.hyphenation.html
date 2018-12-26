@@ -12,14 +12,15 @@
                 text = $("textarea[name=text]", 'form').val(),
                 hyphChar = $("select[name=direction]", 'form').val(),
                 jsonRequest = {
-                    method: "hyphenation.hyphenate",
+                    module: "libindic.hyphenation",
+                    method: "hyphenate",
                     params: [text, hyphChar],
                     id: ""
                 };
             $.ajax({
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
-                url: "JSONRPC",
+                url: "api",
                 data: JSON.stringify(jsonRequest),
                 dataType: "json",
                 beforeSend:function(){
